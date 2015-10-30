@@ -1,25 +1,21 @@
 #intro
   %p
-    Handlebars provides the power necessary to let you build
-    <strong>semantic templates</strong> effectively with no frustration.
+    Handlebars 为你提供了一个可以毫无挫折感的高效率书写 <strong>语义化的模板</strong> 所必需的一切。
 
   %p
-    Handlebars is largely compatible with Mustache templates.
-    In most cases it is possible to swap out Mustache with
-    Handlebars and continue using your current templates.
-    Complete details can be found
+    Mustache 模板和 Handlebars 是兼容的，所以你可以把Mustache模板拿来导入到Handlebars中，并开始使用Handlebars所提供的更丰富的功能。
+
     <a href="https://github.com/wycats/handlebars.js#differences-between-handlebarsjs-and-mustache">here</a>.
 
-= link("Installation", "installation.html", :class => 'download')
+= link("安装下载", "installation.html", :class => 'download')
 
 %h2#getting-started
-  Getting Started
+  快速开始
 
 .contents
   .bullet
     .description
-      Handlebars templates look like regular HTML, with embedded
-      handlebars expressions.
+      Handlebars模板看起来就像是正常的Html，并使用了嵌入的 handlebars 表达式。
     :html
       <div class="entry">
         <h1>{{title}}</h1>
@@ -28,14 +24,13 @@
         </div>
       </div>
     .notes
+     handlebars表达式，是以 <code>{{</code> 开始，跟一些内容，然后以  <code>}}</code> 结束。
       A handlebars expression is a <code>{{</code>, some contents,
-      followed by a <code>}}</code>
-    = link("Learn More: Expressions", "expressions.html", :class => "more-info")
+    = link("更多资料：表达式", "expressions.html", :class => "more-info")
 
   .bullet
     .description
-      You can deliver a template to the browser by including it
-      in a <code>&lt;script&gt;</code> tag.
+      你可以通过<code>&lt;script&gt;</code>标签把一段模板加载到浏览器中。
     :html
       <script id="entry-template" type="text/x-handlebars-template">
         <div class="entry">
@@ -48,28 +43,23 @@
 
   .bullet
     .description
-      Compile a template in JavaScript by using
-      <code>Handlebars.compile</code>
+      在 JavaScript 中使用 <code>Handlebars.compile</code> 来编译模板。
+
     :javascript
       var source   = $("#entry-template").html();
       var template = Handlebars.compile(source);
     .notes
-      It is also possible to precompile your templates. This will
-      result in a smaller required runtime library and significant
-      savings from not having to compile the template in the
-      browser. This can be especially important when working with
-      mobile devices.
-    = link("Learn More: Precompilation", "precompilation.html", :class => "more-info")
+      还可以预编译模板。这样的话，就只需要一个更小的运行时库文件，并且对性能来说是一个极大的节约，因为这样就不必在浏览器中编译模板了。这点在移动版的开发中就更显的非常重要了。
+    = link("更多资料：预编译", "precompilation.html", :class => "more-info")
 
   .bullet
     .description
-      Get the HTML result of evaluating a Handlebars template by
-      executing the template with a context.
+      只需传递一个上下文context执行模板，即可得到返回的 HTML 的值。
     :javascript
       var context = {title: "My New Post", body: "This is my first post!"};
       var html    = template(context);
     .notes
-      results in
+      得到下面的HTML
     :html
       <div class="entry">
         <h1>My New Post</h1>
@@ -78,7 +68,7 @@
         </div>
       </div>
 
-    = link("Learn More: Execution", "execution.html", :class => "more-info")
+    = link("更多资料：执行", "execution.html", :class => "more-info")
 
 %h2#html-escaping
   HTML Escaping
@@ -86,9 +76,7 @@
 .context
   .bullet
     .description
-      Handlebars HTML-escapes values returned by a <code>{{expression}}</code>.
-      If you don't want Handlebars to escape a value, use the "triple-stash", <code>{{{</code>.
-
+      Handlebars的 <code>{{expression}}</code>表达式会返回一个 HTML编码 HTML-escape 过的值。如果不希望Handlebars来编码这些值，使用三个大括号即可：<code>{{{</code>。
     :html
       <div class="entry">
         <h1>{{title}}</h1>
@@ -98,7 +86,7 @@
       </div>
 
     .notes
-      with this context:
+      使用这段上下文（数据）：
 
     :javascript
       {
@@ -107,7 +95,7 @@
       }
 
     .notes
-      results in:
+      会得到如下结果：
 
     :html
       <div class="entry">
@@ -118,10 +106,8 @@
       </div>
 
     .notes
-      Handlebars will not escape a <code>Handlebars.SafeString</code>.
-      If you write a helper that generates its own HTML, you will usually
-      want to return a <code>new Handlebars.SafeString(result)</code>.
-      In such a circumstance, you will want to manually escape parameters.
+
+      Handlebars 不会再对 <code>Handlebars.SafeString</code> 安全字符串进行编码。如果你写的 helper 用来生成 HTML，就经常需要返回一个 <code>new Handlebars.SafeString(result)</code>。在这种情况下，你就需要手动的来编码参数了。
 
     :javascript
       Handlebars.registerHelper('link', function(text, url) {
@@ -134,30 +120,24 @@
       });
 
     .notes
-      This will escape the passed in parameters, but mark the response as
-      safe, so Handlebars will not try to escape it even if the "triple-stash"
-      is not used.
+      这样来编码传递进来的参数，并把返回的值标记为 安全，这样的话，即便不是哟给你“三个大括号”，Handlebars 就不会再次编码它了。
 
 %h2#block-expressions
-  Block Expressions
+  块级表达式
 
 .context
   .bullet
     .description
-      Block expressions allow you to define helpers that will invoke
-      a section of your template with a different context than the
-      current. These block helpers are identified by a <code>#</code> preceeding
-      the helper name and require a matching closing mustache, <code>/</code>, of the
-      same name.
+      块级表达式允许你定义一个helpers，并使用一个不同于当前的上下文（context）来调用你模板的一部分。现在考虑下这种情况，你需要一个helper来生成一段 HTML 列表：
 
     .notes
-      Let's consider a helper that will generate an HTML list:
+      并使用下面的上下文（数据）：
 
     :html
       {{#list people}}{{firstName}} {{lastName}}{{/list}}
 
     .notes
-      If we have the following context:
+      并使用下面的上下文（数据）：
 
     :javascript
       {
@@ -169,12 +149,8 @@
       }
 
     .notes
-      we would create a helper named <code>list</code> to generate our
-      HTML list. The helper receives the <code>people</code> as its
-      first parameter, and an options hash as its second parameter.
-      The options hash contains a property named <code>fn</code>,
-      which you can invoke with a context just as you would invoke a
-      normal Handlebars template.
+      此时需要创建一个 名为 <code>list</code>  的 helper 来生成这段 HTML 列表。这个 helper 使用 people 作为第一个参数，还有一个 options 对象（hash哈希）作为第二个参数。这个 options 对象有一个叫 fn 的属性，你可以传递一个上下文给它（fn），就跟执行一个普通的 Handlebars 模板一样：
+
 
     :javascript
       Handlebars.registerHelper('list', function(items, options) {
@@ -188,7 +164,7 @@
       });
 
     .notes
-      When executed, the template will render:
+      执行之后，这个模板就会渲染出：
 
     :html
       <ul>
@@ -198,32 +174,26 @@
       </ul>
 
     .notes
-      Block helpers have more features, such as the ability to create an
-      <code>else</code> section (used, for instance, by the built-in <code>if</code>
-      helper).
+      块级的 helpers 还有很多其他的特性，比如可以创建一个 <code>else</code>  区块（例如，内置的 if helper 就是用 else）。
 
     .notes
-      Since the contents of a block helper are escaped when you call
-      <code>options.fn(context)</code>, Handlebars does not escape
-      the results of a block helper. If it did, inner content would
-      be double-escaped!
+      注意，因为在你执行 options.fn(context) 的时候，这个 helper 已经把内容编码一次了，所以 Handlebars 不会再对这个 helper 输出的值进行编码了。如果编码了，这些内容就会被编码两 次！
 
-    = link("Learn More: Block Helpers", "block_helpers.html", :class => "more-info")
+    = link("更多资料：块级Helpers", "block_helpers.html", :class => "more-info")
 
 %h2#paths
-  Handlebars Paths
+  Handlebars 路径
 
 .content
   .bullet
     .description
-      Handlebars supports simple paths, just like Mustache.
+      Handlebars 支持简单的路径，就像Mustache那样。
     :html
       <p>{{name}}</p>
 
   .bullet
     .description
-      Handlebars also supports nested paths, making it possible
-      to look up properties nested below the current context.
+      Handlebars 同样也支持嵌套的路径，这样的话就可以在当前的上下文中查找内部嵌套的属性了。
     :html
       <div class="entry">
         <h1>{{title}}</h1>
@@ -234,7 +204,7 @@
         </div>
       </div>
     .notes
-      That template works with this context
+      上面的模板使用下面这段上下文：
     :javascript
       var context = {
         title: "My First Blog Post!",
