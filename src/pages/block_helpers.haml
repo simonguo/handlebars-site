@@ -1,17 +1,14 @@
 #intro
   %p
-    Block helpers make it possible to define custom iterators and
-    other functionality that can invoke the passed block with a new
-    context.
+    块级 helpers 使用自定义的迭代器，其他的 helpers 都可以使用一个新的上下文来执行内部的代码块。
 
 %h2#basic-blocks
-  Basic Blocks
+  基础
 
 .contents
   .bullet
     .description
-      For demonstration purposes, let's define a block helper that invokes the
-      block as though no helper existed.
+      先定义一个简单的块级 helper，它只是简单的执行一下这块代码，就跟没有用这个helper一样。
     :html
       <div class="entry">
         <h1>{{title}}</h1>
@@ -20,19 +17,19 @@
         </div>
       </div>
     .notes
-      The <code>noop</code> helper (short for "no operation") will receive an options hash.
-      This options hash contains a function (<code>options.fn</code>)
-      that behaves like a normal compiled Handlebars template.
-      Specifically, the function will take a context and return a
-      String.
+      这个 <code>noop</code>  helper 接受一个 options 对象。
+      这个对象有一个叫 (<code>options.fn</code>) 的方法，
+      这个方法的用法就跟普通的编译过的 Hanldebars 模板的用法一样。
+      所不同的就是，这个函数执行时会带有一个上下文，
+      并且会返回一个字符串。
     :javascript
       Handlebars.registerHelper('noop', function(options) {
         return options.fn(this);
       });
     .notes
-      Handlebars always invokes helpers with the current context as
-      <code>this</code>, so you can invoke the block with
-      <code>this</code> to evaluate the block in the current context.
+      Handlebars 在执行 helpers 的时候，总是会将
+      <code>this</code> 指向当前的上下文，所以，你只需用
+      <code>this</code> 来调用这一块代码，就可以在当前的上下文中求值了。
 
     .notes
       Any helpers defined in this manner will take precedence over fields defined in the context. To access a field that is masked by a helper, a path reference may be used. In the example above a field named <code>noop</code> on the context object would be referenced using:
@@ -68,14 +65,14 @@
 
 
 %h2#with-helper
-  The <code>with</code> helper
+  <code>with</code> helper
 
 .contents
   .bullet
     .description
-      The <code>with</code> helper demonstrates how to pass a parameter to your helper.
-      When a helper is called with a parameter, it is invoked 
-      with whatever context the template passed in.
+      在上面介绍的 <code>noop</code> helper 的基础上，很容易的就能想到应该如何实现
+      <code>with</code> helper 了。这里呢，
+      不是用当前的上下文来执行代码块，我们可以使用任意的模板所传递进来的上下文。
     :html
       <div class="entry">
         <h1>{{title}}</h1>
@@ -85,10 +82,8 @@
         {{/with}}
       </div>
     .notes
-      You might find a helper like this useful if a section of your
-      JSON object contains deeply nested properties, and you
-      want to avoid repeating the parent name. The
-      above template could be useful with a JSON like:
+      在你使用的JSON嵌套非常深的时候，就会觉得这个helper 非常有帮助了，
+      否则的话，每次都需要先写上很长的父级属性。比如上面的模板可以使用下面的这段JSON：
     :javascript
       {
         title: "First Post",
@@ -98,17 +93,15 @@
         }
       }
     .notes
-      Implementing a helper like this is a lot like implementing
-      the <code>noop</code> helper. Helpers can take
-      parameters, and parameters are evaluated just like expressions
-      used directly inside <code>{{mustache}}</code> blocks.
+      实现这种helper，就跟实现一堆 <code>noop</code> helper 没什么区别。要注意的是，
+      helpers 可以接受参数，并且对参数的求值就跟直接使用 <code>{{mustache}}</code>
+      表达式一样一样地。
     :javascript
       Handlebars.registerHelper('with', function(context, options) {
         return options.fn(context);
       });
     .notes
-      Parameters are passed to helpers in the order that they
-      are passed, followed by the options hash.
+      helpers 接受参数的顺序跟传递进来的顺序相同。
 
 %h2#iterators
   Simple Iterators
@@ -156,7 +149,7 @@
 
   .bullet
     .description
-      This pattern can be used to implement more advanced iterators. 
+      This pattern can be used to implement more advanced iterators.
       For instance, let's create an iterator that creates a
       <code>&lt;ul&gt;</code> wrapper, and wraps each resulting element
       in an <code>&lt;li&gt;</code>.
@@ -187,8 +180,8 @@
         return ret + "</ul>";
       });
     .notes
-      Using a library like underscore.js or SproutCore's runtime library 
-      could make this a bit prettier. For example, here's what it might 
+      Using a library like underscore.js or SproutCore's runtime library
+      could make this a bit prettier. For example, here's what it might
       look like using SproutCore's runtime library:
     :javascript
       Handlebars.registerHelper('list', function(context, options) {
@@ -203,7 +196,7 @@
 .contents
   .bullet
     .description
-      Another common use-case for block helpers is to evaluate conditional statements. 
+      Another common use-case for block helpers is to evaluate conditional statements.
       As with the iterators, Handlebars' built-in <code>if</code> and
       <code>unless</code> control structures are implemented as regular
       Handlebars helpers.
@@ -236,9 +229,9 @@
       {{/if}}
     .notes
       Handlebars provides the block for the <code>else</code> fragment
-      as <code>options.inverse</code>. You do not need to check for the 
+      as <code>options.inverse</code>. You do not need to check for the
       existence of the <code>else</code> fragment: Handlebars will detect
-      it automatically and register a "noop" function. 
+      it automatically and register a "noop" function.
     :javascript
       Handlebars.registerHelper('if', function(conditional, options) {
         if(conditional) {
@@ -278,8 +271,8 @@
   .bullet
     .description
       Like regular helpers, block helpers can accept an optional Hash
-      as its final argument. Let's revisit the <code>list</code> helper 
-      and make it possible for us to add any number of optional attributes 
+      as its final argument. Let's revisit the <code>list</code> helper
+      and make it possible for us to add any number of optional attributes
       to the <code>&lt;ul&gt;</code> element we will create.
     :html
       {{#list nav id="nav-bar" class="top"}}

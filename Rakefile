@@ -59,4 +59,3 @@ task :deploy do |t, args|
     system "git push github gh-pages"
   end
 end
-
