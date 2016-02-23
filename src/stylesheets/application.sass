@@ -1,0 +1,342 @@
+@import compass/css3/box-shadow
+@import compass/css3/text-shadow
+@import compass/css3/border-radius
+@import compass/css3/box-sizing
+@import compass/css3/gradient
+@import compass/css3/shared
+
+$back: #FFB572
+$headers: darken($back, 55%)
+$text: darken($headers, 5%)
+
+$gradient: #F7931E
+$gradient-top: darken($gradient, 5%)
+$gradient-bottom: darken($gradient, 15%)
+$gradient-dark: darken($gradient, 25%)
+
+@mixin flexbox($direction, $align: center)
+  display: -ms-flexbox
+  display: -webkit-box
+  display: -moz-box
+  @if $direction == vertical
+    -ms-flex-direction: column
+  @else
+    -ms-flex-direction: row
+  -webkit-box-orient: $direction
+  -moz-box-orient: $direction
+  -ms-flex-align: $align
+  -webkit-box-align: $align
+  -moz-box-align: $align
+
+@mixin distribute-children($distribute)
+  -webkit-box-pack: $distribute
+  -moz-box-pack: $distribute
+
+@mixin liquid($size: 1)
+  -webkit-box-flex: $size
+  -moz-box-flex: $size
+
+=bundler-link
+  text-decoration: none
+  color: #0e3f54
+
+#standalone
+  line-height: 150%
+
+  code
+    background-color: rgba(0, 0, 0, 0.1)
+
+  h1
+    margin-top: 40px
+    margin-bottom: 10px
+    line-height: 125%
+
+html
+  @include background-image(url("/images/noise.png"), radial-gradient(top center, #f7931e, #f15a24 750px))
+  width: 100%
+  background-color: #F7931E
+  padding-top: 10px
+  font-family: Helvetica, sans-serif
+
+img
+  border: 0
+
+code
+  font-family: monospace
+  font-size: 120%
+  padding: 0 3px
+  border: 1px solid rgba(0,0,0,0.1)
+  +border-radius(3px)
+
+a
+  color: #6666cc
+  text-decoration: none
+
+  &:hover
+    text-decoration: underline
+
+a.download
+  text-decoration: none
+  display: block
+  color: #fff
+  margin: 20px auto 0
+  width: 300px
+  height: 45px
+  line-height: 45px
+  font-size: 20px
+  +single-text-shadow(rgba(0,0,0,0.3),0, -1px, 0)
+  text-align: center
+  @include background-image(linear-gradient($gradient-top, $gradient-bottom))
+  +border-radius(5px)
+
+.download-more,
+a.download-runtime
+  display: block
+  margin-top: 5px
+  font-size: 12px
+  text-align: center
+
+a.more-info
+  padding-top: 8px
+  padding-bottom: 8px
+  text-decoration: none
+  display: block
+  color: #fff
+  margin: 10px 0 0 450px
+  +single-text-shadow(rgba(0,0,0,0.3),0, -1px, 0)
+  text-align: center
+  background-color: #C26C07
+  @include background-image(linear-gradient($gradient-top, $gradient-bottom))
+  +border-radius(5px)
+
+  &:hover
+    background-color: #905005
+    @include background-image(linear-gradient($gradient-bottom, $gradient-dark))
+
+a.issue-tracker
+  display: block
+  margin-top: 5px
+  font-size: 12px
+  text-align: right
+
+.intro
+  width: 100%
+
+#body
+  +flexbox(vertical, center)
+  width: 100%
+
+#contents
+  +flexbox(vertical, justify)
+  background-color: rgba(#fff, 0.9)
+  +single-box-shadow(darken($back, 50%), 0, 0, 10px)
+  padding: 20px
+  +border-radius(10px)
+  width: 725px
+  position: relative
+  top: -20px
+  z-index: 2
+  h1
+    color: darken($headers, 5%)
+    margin-bottom: 0
+
+#intro
+  background: rgba(0,0,0,0.1)
+  +border-radius(5px)
+  padding: 10px 10px
+  color: lighten($headers, 5%)
+  font-size: 18px
+  line-height: 24px
+  p
+    margin: 0
+  p + p
+    margin-top: 10px
+  strong
+    color: $headers
+
+#header
+  z-index: 1
+  margin-bottom: 20px
+  height: 200px
+  overflow: hidden
+  h1
+    font-size: 22px
+    text-align: right
+    padding-right: 43px
+    color: $headers
+
+#callout
+  img
+    position: absolute
+    top: -170px
+    left: -90px
+
+#footer
+  +box-sizing(border-box)
+  +flexbox(horizontal, center)
+  +distribute-children(justify)
+  padding: 8px 16px
+  background-color: rgba(0,0,0,0.1)
+  width: 100%
+  margin-top: 25px
+
+  img:first-child
+    +single-box-shadow(blue, 0, 0, 5px)
+
+  img:last-child
+    margin-top: -20px
+    margin-right: -20px
+
+  .spacer
+    +liquid
+
+  img
+    display: block
+
+  #navigation
+    +flexbox(vertical, center)
+
+    p
+      font-family: Helvetica, sans-serif
+      color: #366
+      font-size: 16px
+      margin: 0
+      a
+        +bundler-link
+
+.contents
+  width: 725px
+
+h2
+  font-size: 20px
+  padding: 5px
+  margin-top: 24px
+  color: $headers
+  border-bottom: 3px solid lighten($headers, 10%)
+  width: 100%
+  +box-sizing("border-box")
+
+h3
+  font-size: 18px
+  padding: 5px
+  margin-top: 12px
+  color: $headers
+  width: 100%
+  +box-sizing("border-box")
+
+  code
+    font-size: inherit
+
+ul.bullet
+  +flexbox(horizontal, center)
+  +distribute-children(justify)
+
+  a
+    margin-left: 0
+    margin-right: 10px
+    +liquid
+    &:last-child
+      margin-right: 0
+
+.bullet
+  width: 100%
+  padding: 8px 15px
+  +box-sizing("border-box")
+  +flexbox(vertical, justify)
+
+  .description
+    width: 100%
+    margin-right: 16px
+    color: $text
+    line-height: 24px
+    margin-bottom: 8px
+
+  .how
+    +flexbox(vertical, justify)
+    +liquid
+    line-height: 24px
+  .notes
+    font-size: 90%
+    line-height: 150%
+    margin-top: 15px
+    margin-bottom: 8px
+    padding-right: 4px
+    padding-left: 4px
+    color: lighten($text, 5%)
+    &+ a
+      margin-top: 10px
+    &+ pre
+      margin-top: 10px
+    &+ .description
+      margin-top: 20px
+
+  pre
+    +liquid
+    margin: 0
+
+  code
+    background-color: rgba(0,0,0,0.1)
+
+pre
+  +border-radius(5px)
+
+.bullet:nth-child(even)
+  background-color: rgba(0,0,0,0.1)
+  border-top: 1px solid rgba(0,0,0,0.1)
+  border-bottom: 1px solid rgba(0,0,0,0.1)
+
+.bullet:not(:nth-of-type(1))
+  padding-top: 15px
+
+.bullet
+  padding-bottom: 25px
+  //border-bottom: 1px solid rgba(0,0,0,0.1)
+
+#credits
+  p
+    text-align: center
+    font-size: 8pt
+    color: #668493
+    a
+      color: #2c596b
+
+#github
+  img
+    position: absolute
+    top: 0
+    right: 0
+    border: 0
+
+#header-segment
+  display: inline
+  padding-left: auto
+  padding-right: auto
+
+#versions
+  position: absolute
+  top: 0
+  left: 0
+  padding: 0.4em
+  background: rgba(0,0,0,0.1)
+  +border-bottom-right-radius(10px)
+  a
+    +bundler-link
+    padding: 0.1em 0.25em
+  a.current
+    font-weight: bold
+
+.try-handlebars
+  margin-top: 1em
+
+  textarea, pre.output
+    +border-radius(4px)
+    border: 1px solid #444
+    color: #444
+    font-family: monospace
+    min-height: 8em
+    padding: 10px 2%
+    resize: vertical
+    width: 95%
+
+  pre.output
+    background: #eee

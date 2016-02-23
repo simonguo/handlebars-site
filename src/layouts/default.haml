@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %title Handlebars.js 中文网: Minimal Templating on Steroids
+    %meta{"http-equiv" => "Content-Type", "content" => "text/html; charset=UTF-8"}/
+    = stylesheets
+    %link{:rel => "shortcut icon", :href => "/images/favicon.png", :type => "image/png" }
+  %body
+    #body
+      #header
+        %a{:href => "/"}
+          = img("handlebars_logo.png", :alt => "Handlebars.js 中文网: Minimal Templating on Steroids")
+      #contents
+        %a#callout{:href => "http://www.devswag.com/collections/handlebars"}
+          = img("handlebars-devswag.png", :alt => "上DevSwag购买Handlebars商品!")
+        = yield
+
+        %a{:href => "https://github.com/wycats/handlebars-site/issues", :class => "issue-tracker"}
+          如果发现问题？ 告诉我们！
+
+    #credits
+    %a#github{ :href => "http://github.com/wycats/handlebars.js/" }
+      %img{:src => "http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png", :alt => "Fork me on GitHub"}
+
+    %script
+      var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256697465'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/stat.php%3Fid%3D1256697465' type='text/javascript'%3E%3C/script%3E"));

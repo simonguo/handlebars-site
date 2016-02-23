@@ -1,0 +1,115 @@
+#intro
+  Using the Handlebars precompiler, you can precompile your
+  Handlebars templates to save time on the client and reduce
+  the required runtime size of the handlebars library.
+
+%h2#getting-started
+  Getting Started
+
+.contents
+  .bullet
+    .description
+      First, you will need to install node and npm. On OS X:
+
+    :highlight_plain
+      $ brew install node
+    .notes
+      This assumes you already have Homebrew installed. If not,
+      <a href="http://brew.sh/">install it</a> first.
+
+  .bullet
+    .description
+      Next, install the Handlebars npm package.
+
+    :highlight_plain
+      $ npm install handlebars -g
+    .notes
+      Using the <code>-g</code> flag installs the package globally,
+      so it can be used in any project.
+
+  .bullet
+    .description
+      Now, you're ready to use the precompiler:
+
+    :highlight_plain
+      $ handlebars &lt;input&gt; -f &lt;output&gt;
+
+    .notes
+      The compiler will insert templates in <code>Handlebars.templates</code>.
+      If your input file is <code>person.handlebars</code>, the compiler will
+      insert it at <code>Handlebars.templates.person</code>. This template will
+      be a function that may be directly executed in the same manner as templates
+      compiled locally. I.e.
+
+    :javascript
+      Handlebars.templates.person(context, options);
+
+  .bullet
+    .description
+      If you're working with precompiled templates, you don't need to ship
+      the compiler with your deployed application. Instead, you can use the
+      smaller "runtime" build.
+    :html
+      <script src="/libs/handlebars.runtime.js"></script>
+
+    .notes
+      In addition to reducing the download size, eliminating client-side
+      compilation will significantly speed up boot time, as compilation
+      is the most expensive part of Handlebars.
+
+%h2#optimizations
+  Optimizations
+
+.contents
+  .bullet
+    .description
+      Because you are precompiling templates, you can also apply several
+      optimization to the compiler. The first allows you to specify a
+      list of the known helpers to the compiler
+    :highlight_plain
+      handlebars &lt;input&gt; -f &lt;output&gt; -k each -k if -k unless
+    .notes
+      The Handlebars compiler will optimize accesses to those helpers for
+      performance.
+
+    .notes
+      When all helpers are known at compile time, the <code>--knownOnly</code> option provides the smallest generated code that also provides the fastest execution.
+
+%h2#usage
+  Usage
+
+.contents
+  .bullet
+    %pre.sunburst(style="overflow:auto")
+      = preserve do
+        :escaped
+          Usage: node ./bin/handlebars [template|directory]...
+
+          Options:
+            -f, --output         Output File
+            --map                Source Map File                                                    [string]  [default: undefined]
+            -a, --amd            Exports amd style (require.js)
+            -c, --commonjs       Exports CommonJS style, path to Handlebars module                                 [default: null]
+            -h, --handlebarPath  Path to handlebar.js (only valid for amd-style)                                     [default: ""]
+            -k, --known          Known helpers
+            -o, --knownOnly      Known helpers only
+            -m, --min            Minimize output
+            -n, --namespace      Template namespace                                              [default: "Handlebars.templates"]
+            -s, --simple         Output template function only.
+            -N, --name           Name of passed string templates. Optional if running in a simple mode. Required when operating
+                                 on multiple templates.
+            -i, --string         Generates a template from the passed CLI argument.
+                                 "-" is treated as a special value and causes stdin to be read for the template value.
+            -r, --root           Template root. Base value that will be stripped from template names.
+            -p, --partial        Compiling a partial template
+            -d, --data           Include data when compiling
+            -e, --extension      Template extension.                                                       [default: "handlebars"]
+            -b, --bom            Removes the BOM (Byte Order Mark) from the beginning of the templates.
+            -v, --version        Prints the current compiler version
+            --help               Outputs this message
+
+    .notes
+      If using the precompiler's normal mode, the resulting templates will be stored to the <code>Handlebars.templates</code> object using the relative template name sans the extension. These templates may be executed in the same manner as templates.
+
+    .notes
+      If using the simple mode the precompiler will generate a single javascript method. To execute this method it must be passed to the <code>Handlebars.template</code> method and the resulting object may be used as normal.

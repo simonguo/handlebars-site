@@ -1,0 +1,326 @@
+#intro
+  Handlebars expressions are the basic unit of a Handlebars template.
+  You can use them alone in a <code>{{mustache}}</code>, pass them
+  to a Handlebars helper, or use them as values in hash arguments.
+
+%h2#basic-blocks
+  Basic Usage
+
+.contents
+  .bullet
+    .description
+      The simplest Handlebars expression is a simple identifier:
+    :html
+      <h1>{{title}}</h1>
+    .notes
+      This expression means "look up the <code>title</code> property in
+      the current context". Block helpers may manipulate the current
+      context, but they do not change the basic meaning of an expression.
+    .notes
+      Actually, it means "look for a helper named <code>title</code>,
+      then do the above", but we'll get to that soon enough.
+
+  .bullet
+    .description
+      Handlebars expressions can also be dot-separated paths.
+    :html
+      <h1>{{article.title}}</h1>
+    .notes
+      This expression means "look up the <code>article</code> property in
+      the current context. Then look up the <code>title</code>
+      property in the result".
+    .notes
+      Handlebars also supports a deprecated <code>/</code> syntax,
+      so you could write the above template as:
+    :html
+      <h1>{{article/title}}</h1>
+
+  .bullet
+    .description
+      Identifiers may be any unicode character except for the following:
+    .notes
+      Whitespace
+      %code !
+      %code "
+      %code #
+      %code %
+      %code &
+      %code '
+      %code (
+      %code )
+      %code *
+      %code +
+      %code ,
+      %code .
+      %code /
+      %code ;
+      %code <
+      %code =
+      %code >
+      %code @
+      %code [
+      %code \
+      %code ]
+      %code ^
+      %code `
+      %code {
+      %code |<!-- Comment to prevent multiline parsing -->
+      %code }
+      %code ~
+
+  .bullet
+    .description
+      To reference a property that is not a valid identifier, you can
+      use segment-literal notation, <code>[</code>:
+    :html
+      {{#each articles.[10].[#comments]}}
+        <h1>{{subject}}</h1>
+        <div>
+          {{body}}
+        </div>
+      {{/each}}
+    .notes
+      In the example above, the template will treat the <code>each</code>
+      parameter roughly equivalent to this javascript:
+      <code>articles[10]['#comments']</code>
+    .notes
+      You may not include a closing <code>]</code> in a path-literal,
+      but all other characters are fair game.
+
+    .description
+      JavaScript-style strings, <code>"</code> and <code>'</code>, may also be used vs. <code>[</code>
+      pairs.
+
+  .bullet
+    .description
+      Handlebars HTML-escapes values returned by a <code>{{expression}}</code>.
+      If you don't want Handlebars to escape a value, use the "triple-stash", <code>{{{</code>
+    :html
+      {{{foo}}}
+
+%h2#helpers
+  Helpers
+
+.contents
+  .bullet
+    .description
+      A Handlebars helper call is a simple identifier, followed by
+      zero or more parameters (separated by space). Each parameter is a Handlebars
+      expression.
+    :html
+      {{{link story}}}
+    .notes
+      In this case, <code>link</code> is the name of a Handlebars
+      helper, and story is a parameter to the helper. Handlebars
+      evaluates parameters in exactly the same way described above
+      in "Basic Usage".
+    :javascript
+      Handlebars.registerHelper('link', function(object) {
+        var url = Handlebars.escapeExpression(object.url),
+            text = Handlebars.escapeExpression(object.text);
+
+        return new Handlebars.SafeString(
+          "<a href='" + url + "'>" + text + "</a>"
+        );
+      });
+    .notes
+      When returning HTML from a helper, you should return a
+      Handlebars SafeString if you don't want it to be escaped
+      by default. When using SafeString all unknown or unsafe data should
+      be manually escaped with the <code>escapeExpression</code> method.
+
+  .bullet
+    .description
+      You can also pass a simple String, number, or boolean as a parameter to Handlebars
+      helpers.
+    :html
+      {{{link "See more..." story.url}}}
+    .notes
+      In this case, Handlebars will pass the link helper two parameters:
+      the String <code>"See more..."</code> and the result of evaluating
+      <code>story.url</code> in the current context.
+    :javascript
+      Handlebars.registerHelper('link', function(text, url) {
+        url = Handlebars.escapeExpression(url);
+        text = Handlebars.escapeExpression(text);
+
+        return new Handlebars.SafeString(
+          "<a href='" + url + "'>" + text + "</a>"
+        );
+      });
+    .notes
+      You could use the exact same helper with dynamic text based on
+      the value of <code>story.text</code>:
+    :html
+      {{{link story.text story.url}}}
+
+  .bullet
+    .description
+      Handlebars helpers can also receive an optional sequence of key-value
+      pairs as their final parameter (referred to as hash arguments in
+      the documentation):
+    :html
+      {{{link "See more..." href=story.url class="story"}}}
+    .notes
+      The keys in hash arguments must each be simple identifiers, and the
+      values are Handlebars expressions. This means that values can
+      be simple identifiers, paths, or Strings.
+    :javascript
+      Handlebars.registerHelper('link', function(text, options) {
+        var attrs = [];
+
+        for (var prop in options.hash) {
+          attrs.push(
+              Handlebars.escapeExpression(prop) + '="'
+              + Handlebars.escapeExpression(options.hash[prop]) + '"');
+        }
+
+        return new Handlebars.SafeString(
+          "<a " + attrs.join(" ") + ">" + Handlebars.escapeExpression(text) + "</a>"
+        );
+      });
+    .notes
+      Handlebars provides additional metadata, such as Hash arguments,
+      to helpers as a final parameter.
+
+  .bullet
+    .description
+      Handlebars also offers a mechanism for invoking a helper with
+      a block of the template. Block helpers can then invoke that
+      block zero or more times with any context it chooses.
+    = link("Learn More: Block Helpers", "block_helpers.html", :class => "more-info")
+
+%h2#subexpressions
+  Subexpressions
+
+.contents
+  .bullet
+    .description
+      Handlebars offers support for subexpressions, which allows
+      you to invoke multiple helpers within a single mustache, and
+      pass in the results of inner helper invocations as arguments
+      to outer helpers. Subexpressions are delimited by
+      parentheses.
+    :html
+      {{outer-helper (inner-helper 'abc') 'def'}}
+    .notes
+      In this case, <code>inner-helper</code> will get invoked
+      with the string argument <code>'abc'</code>, and whatever
+      the <code>inner-helper</code> function returns will get
+      passed in as the first argument to <code>outer-helper</code>
+      (and <code>'def'</code> will get passed in as the 
+      second argument to <code>outer-helper</code>.
+
+
+%h2#whitespace-control
+  Whitespace Control
+
+.contents
+  .bullet
+    .description
+      Template whitespace may be omitted from either side of any mustache statement by adding a
+      <code>~</code> character by the braces. When applied all whitespace on that side will be
+      removed up to the first handlebars expression or non-whitespace character on that side.
+
+    :html
+      {{#each nav ~}}
+        <a href="{{url}}">
+          {{~#if test}}
+            {{~title}}
+          {{~^~}}
+            Empty
+          {{~/if~}}
+        </a>
+      {{~/each}}
+
+
+    .notes
+      with this context:
+
+    :javascript
+      {
+        nav: [
+          {url: 'foo', test: true, title: 'bar'},
+          {url: 'bar'}
+        ]
+      }
+
+    .notes
+      results in output sans newlines and formatting whitespace:
+
+    :html
+      <a href="foo">bar</a><a href="bar">Empty</a>
+
+    .notes
+      This expands the default behavior of stripping lines that are "standalone" helpers (only a block
+      helper, comment, or partial and whitespace).
+
+    :html
+      {{#each nav}}
+        <a href="{{url}}">
+          {{#if test}}
+            {{title}}
+          {{^}}
+            Empty
+          {{/if}}
+        </a>
+      {{~/each}}
+
+    .notes
+      will render
+
+    :html
+      <a href="foo">
+          bar
+      </a>
+      <a href="bar">
+          Empty
+      </a>
+
+
+%h2#escaping
+  Escaping
+
+.contents
+  .bullet
+    .description
+      Handlebars content may be escaped in one of two ways, inline escapes or raw block helpers.
+      Inline escapes created by prefixing a mustache block with <code>\</code>. Raw blocks are
+      created using <code>{{{{</code> mustache braces.
+
+    :html
+      \{{escaped}}
+      {{{{raw}}}
+        {{escaped}}
+      {{{{/raw}}}}
+
+    .notes
+      Raw blocks operate in the same manner as other <a href="/block_helpers.html">block helpers</a>
+      with the distinction of the child content is treated as a literal string.
+
+
+%h2#id-tracking
+  Id Tracking
+
+.contents
+  .bullet
+    .description
+      Optionally, helpers can be informed of the paths that were used to lookup an argument for a
+      given value. This mode may be enabled via the <code>trackIds</code> compiler flag.
+
+    :html
+      {{foo bar.baz}}
+
+    .notes
+      would call the helper <code>foo</code> with the value of <code>bar.baz</code> but also will
+      include the literal string <code>"bar.baz"</code> in the <code>ids</code> field on the
+      <code>options</code> argument.
+
+    .notes
+      This can be used for future lookup of parameters should it be necessary, but does add
+      additional overhead.
+    .notes
+      When this mode is enabled, all builtin helpers will generate a
+      <a href="/reference.html#data-contextPath"><code>@contextPath</code></a> variable that denotes
+      the lookup path for the current context. It's highly recommended that generic helpers provide
+      such a variable if they modify the context when executing their children.

@@ -1,0 +1,406 @@
+#intro
+  %p
+    块级 helpers 使用自定义的迭代器，其他的 helpers 都可以使用一个新的上下文来执行内部的代码块。
+
+%h2#basic-blocks
+  基础
+
+.contents
+  .bullet
+    .description
+      先定义一个简单的块级 helper，它只是简单的执行一下这块代码，就跟没有用这个helper一样。
+    :html
+      <div class="entry">
+        <h1>{{title}}</h1>
+        <div class="body">
+          {{#noop}}{{body}}{{/noop}}
+        </div>
+      </div>
+    .notes
+      这个 <code>noop</code>  helper 接受一个 options 对象。
+      这个对象有一个叫 (<code>options.fn</code>) 的方法，
+      这个方法的用法就跟普通的编译过的 Hanldebars 模板的用法一样。
+      所不同的就是，这个函数执行时会带有一个上下文，
+      并且会返回一个字符串。
+    :javascript
+      Handlebars.registerHelper('noop', function(options) {
+        return options.fn(this);
+      });
+    .notes
+      Handlebars 在执行 helpers 的时候，总是会将
+      <code>this</code> 指向当前的上下文，所以，你只需用
+      <code>this</code> 来调用这一块代码，就可以在当前的上下文中求值了。
+
+    .notes
+      Any helpers defined in this manner will take precedence over fields defined in the context.
+      To access a field that is masked by a helper, a path reference may be used.
+      In the example above a field named <code>noop</code> on the context object
+      would be referenced using:
+
+
+    :html
+      {{./noop}}
+
+%h2#basic-blocks
+  Basic Block Variation
+
+.contents
+  .bullet
+    .description
+      To better illustrate the syntax, let's define another block helper that adds some markup to the wrapped text.
+    :html
+      <div class="entry">
+        <h1>{{title}}</h1>
+        <div class="body">
+          {{#bold}}{{body}}{{/bold}}
+        </div>
+      </div>
+    .notes
+      The <code>bold</code> helper will add markup to make its text bold.
+      As before, the function will take a context as input and return a String.
+    :javascript
+      Handlebars.registerHelper('bold', function(options) {
+        return new Handlebars.SafeString(
+            '<div class="mybold">'
+            + options.fn(this)
+            + '</div>');
+      });
+
+
+
+%h2#with-helper
+  <code>with</code> helper
+
+.contents
+  .bullet
+    .description
+      在上面介绍的 <code>noop</code> helper 的基础上，很容易的就能想到应该如何实现
+      <code>with</code> helper 了。这里呢，
+      不是用当前的上下文来执行代码块，我们可以使用任意的模板所传递进来的上下文。
+    :html
+      <div class="entry">
+        <h1>{{title}}</h1>
+        {{#with story}}
+          <div class="intro">{{{intro}}}</div>
+          <div class="body">{{{body}}}</div>
+        {{/with}}
+      </div>
+    .notes
+      在你使用的JSON嵌套非常深的时候，就会觉得这个helper 非常有帮助了，
+      否则的话，每次都需要先写上很长的父级属性。比如上面的模板可以使用下面的这段JSON：
+    :javascript
+      {
+        title: "First Post",
+        story: {
+          intro: "Before the jump",
+          body: "After the jump"
+        }
+      }
+    .notes
+      实现这种helper，就跟实现一堆 <code>noop</code> helper 没什么区别。要注意的是，
+      helpers 可以接受参数，并且对参数的求值就跟直接使用 <code>{{mustache}}</code>
+      表达式一样一样地。
+    :javascript
+      Handlebars.registerHelper('with', function(context, options) {
+        return options.fn(context);
+      });
+    .notes
+      helpers 接受参数的顺序跟传递进来的顺序相同。
+
+%h2#iterators
+  简单的迭代器
+
+.contents
+  .bullet
+    .description
+      使用块级 helpers 的一个非常常见的目的就是定义一个自定义的迭代器。
+      实际上，所有的 Handlebars 内置的 helpers 就是一些常规的 块级 helpers。
+      我们一起来看看内置的 each helper 是如何工作的：
+    :html
+      <div class="entry">
+        <h1>{{title}}</h1>
+        {{#with story}}
+          <div class="intro">{{{intro}}}</div>
+          <div class="body">{{{body}}}</div>
+        {{/with}}
+      </div>
+      <div class="comments">
+        {{#each comments}}
+          <div class="comment">
+            <h2>{{subject}}</h2>
+            {{{body}}}
+          </div>
+        {{/each}}
+      </div>
+    .notes
+      在这里的情况下，我们希望对 comments 数组的每一项都执行 传递给 each 的这一块代码。
+    :javascript
+      Handlebars.registerHelper('each', function(context, options) {
+        var ret = "";
+
+        for(var i=0, j=context.length; i<j; i++) {
+          ret = ret + options.fn(context[i]);
+        }
+
+        return ret;
+      });
+    .notes
+      这样，我们迭代传进来的参数的每一个项，并在每一次迭代的时候执行一次块中的代码。
+      在我们迭代的过程中，还构建了一个字符串，并最终返回这个字符串。
+
+  .bullet
+    .description
+      可以看出，你也可以很容易的实现一个更高级的迭代器。
+      例如，我们创建一个迭代器，可以生成 <code>&lt;ul&gt;</code> 的包裹容器，
+      并且把每一个元素的计算结果包裹到<code>&lt;li&gt;</code> 中去。
+    :html
+      {{#list nav}}
+        <a href="{{url}}">{{title}}</a>
+      {{/list}}
+    .notes
+      可以使用类似下面的上下文来执行模板：
+    :javascript
+      {
+        nav: [
+          { url: "http://www.yehudakatz.com", title: "Katz Got Your Tongue" },
+          { url: "http://www.sproutcore.com/block", title: "SproutCore Blog" },
+        ]
+      }
+    .notes
+      这个 helper 跟内置的 <code>each</code> helper 没有太大的不同。
+
+    :javascript
+      Handlebars.registerHelper('list', function(context, options) {
+        var ret = "<ul>";
+
+        for(var i=0, j=context.length; i<j; i++) {
+          ret = ret + "<li>" + options.fn(context[i]) + "</li>";
+        }
+
+        return ret + "</ul>";
+      });
+    .notes
+      你当然也可以使用类似 underscore.js 或 SproutCore's 的类库，让代码看起来更精简漂亮些。
+      使用 SproutCore's 的示例如下：
+    :javascript
+      Handlebars.registerHelper('list', function(context, options) {
+        return "<ul>" + context.map(function(item) {
+          return "<li>" + options.fn(item) + "</li>";
+        }).join("\n") + "</ul>";
+      });
+
+%h2#conditionals
+  条件
+
+.contents
+  .bullet
+    .description
+      使用 helpers 的另一个常见需求就是实现条件判断。
+      再次重申一遍，Handlebars 内置的 <code>if</code> 和 <code>unless</code> 控制结构就是使用常规的 helpers 来实现的。
+    :html
+      {{#if isActive}}
+        <img src="star.gif" alt="Active">
+      {{/if}}
+    .notes
+      控制结构一般不会改变上下文，只是要根据一些变量来决定是否要执行这一块代码。
+    :javascript
+      Handlebars.registerHelper('if', function(conditional, options) {
+        if(conditional) {
+          return options.fn(this);
+        }
+      });
+
+  .bullet
+    .description
+      在写控制结构的时候，经常需要在模板中提供一块 条件求值返回false时 执行的模板代码。
+      Handlebars 给 helpers 提供了通用的 <code>else</code> 功能来解决这个问题。
+    :html
+      {{#if isActive}}
+        <img src="star.gif" alt="Active">
+      {{else}}
+        <img src="cry.gif" alt="Inactive">
+      {{/if}}
+    .notes
+      Handlebars 以 <code>options.inverse</code> 的形式来支持 <code>else</code> 块中的代码。如果模板没有提供条件取反的模板，
+      Handlebars会自动的创建一个 空函数，这样你就不必去检查 inverse 是否存在了。
+    :javascript
+      Handlebars.registerHelper('if', function(conditional, options) {
+        if(conditional) {
+          return options.fn(this);
+        } else {
+          return options.inverse(this);
+        }
+      });
+    .notes
+      Handlebars 还给 helpers 提供了额外的元数据，附加在 options 对象上面。继续阅读下面的例子。
+
+  .bullet
+    .description
+      Conditionals may also be chained by including the subsequent helper call
+      within the else mustache.
+
+    :html
+      {{#if isActive}}
+        <img src="star.gif" alt="Active">
+      {{else if isInactive}}
+        <img src="cry.gif" alt="Inactive">
+      {{/if}}
+
+    .notes
+      It is not necessary to use the same helper in subsequent calls, the
+      <code>unless</code> helper could be used in the else portion as with any
+      other helper. When the helper values are different, the closing mustache
+      should match the opening helper name.
+
+
+%h2#hash-arguments
+  哈希参数
+
+.contents
+  .bullet
+    .description
+      就像普通的 helpers，块级 helpers 可以接受一个可选的对象作为最后一个参数。
+      我们一起重温一下 <code>list</code> helper，并让他可以接受任意数量的可选属性，并且把添加到我们要创建的
+      <code>&lt;ul&gt;</code> 元素上。
+    :html
+      {{#list nav id="nav-bar" class="top"}}
+        <a href="{{url}}">{{title}}</a>
+      {{/list}}
+    .notes
+      Handlebars 以 <code>options.hash</code> 的形式把最后传进来的键值对挂在上来。
+      这样就更容易接受不定数量的参数了，同时接受一个可选的对象。
+      如果模板没有提供哈希参数，Handlebars 会自动的传一个空对象（<code>{}</code>），
+      这样你就不必检查哈希参数是否存在了。
+    :javascript
+      Handlebars.registerHelper('list', function(context, options) {
+        var attrs = Em.keys(options.hash).map(function(key) {
+          return key + '="' + options.hash[key] + '"';
+        }).join(" ");
+
+        return "<ul " + attrs + ">" + context.map(function(item) {
+          return "<li>" + options.fn(item) + "</li>";
+        }).join("\n") + "</ul>";
+      });
+    .notes
+      哈希参数提供了一个强大的方法来给 helper 提供任意数量的可选参数，而且避免了由可选性导致的复杂语法。
+
+.contents
+  .bullet
+    .description
+      %p
+        块级helper还可以往它的子模板中注入私有变量。在一些情况下会很有帮助，比如需要把一些不在原来上下文中的数据插进来。
+      %p
+        例如，在循环一个列表的时候，你需要以私有变量的形式提供当前的索引index值。
+    :html
+      {{#list array}}
+        {{@index}}. {{title}}
+      {{/list}}
+    :javascript
+      Handlebars.registerHelper('list', function(context, options) {
+        var out = "<ul>", data;
+
+        if (options.data) {
+          data = Handlebars.createFrame(options.data);
+        }
+
+        for (var i=0; i<context.length; i++) {
+          if (data) {
+            data.index = i;
+          }
+
+          out += "<li>" + options.fn(context[i], { data: data }) + "</li>";
+        }
+
+        out += "</ul>";
+        return out;
+      });
+    .notes
+      私有属性通过 <code>data</code> 选项来提供，并且在所有的内部作用域内都可以使用。
+    .notes
+      要保证每次带着 data 执行代码块的时候都生成一个新的 data 帧。否则的话，后面的 helpers 可能会意外的改变前面的变量。
+    .notes
+      还要确保在试图跟已存在的 data 对象交互之前 data 对象已经存在了。
+      私有变量的行为是有条件编译的，有一些模板可能并没有创建这个字段
+    .notes
+      Also ensure that the <code>data</code> field is defined prior to attempting to
+      interact with an existing data object. The private variable behavior is condtionally
+      compiled and some templates might not create this field.
+
+
+%h2#block-params
+  Block Parameters
+
+.contents
+  .bullet
+    .description
+      New in Handlebars 3.0, it's possible to receive named parameters from supporting helpers.
+
+    :html
+      {{#each users as |user userId|}}
+        Id: {{userId}} Name: {{user.name}}
+      {{/each}}
+
+    .notes
+      In this particular example, <code>user</code> will have the same value as the current context and <code>userId</code> will have the index value for the iteration.
+
+    .notes
+      This allows for nested helpers to avoid name conflicts that can occur with private variables.
+
+    :html
+      {{#each users as |user userId|}}
+        {{#each user.book as |book bookId|}}
+          User Id: {{userId}} Book Id: {{bookId}}
+        {{/each}}
+      {{/each}}
+
+  .bullet
+    .description
+      A number of <a href="builtin_helpers.html">builtin helpers</a> support block parameters and any custom helper may provide them through the <code>blockParams</code> options field.
+
+    :javascript
+      Handlebars.registerHelper('block-params', function() {
+        var args = [],
+            options = arguments[arguments.length - 1];
+        for (var i = 0; i < arguments.length - 1; i++) {
+          args.push(arguments[i]);
+        }
+
+        return options.fn(this, {data: options.data, blockParams: args});
+      });
+    :html
+      {{#block-params 1 2 3 as |foo bar baz|}}
+        {{foo}} {{bar}} {{baz}}
+      {{/block-params}}
+
+    .notes
+      Implements a helper that allows for named variable declarations within a given block. This example would output <code>1 2 3</code> on render.
+
+    .notes
+      Helpers can determine the number of block paramemters referenced by the template via the <code>options.fn.blockParams</code> field, which is an integer count. This value represents the number of block parameters that could be referenced by the child template. Parameters beyond this cound will never be referenced and can safely be omitted by the helper if desired. This is optional and any additional parameters passed to the template will be silently ignored.
+
+%h2#raw-blocks
+  Raw Blocks
+
+.contents
+  .bullet
+    .description
+      Raw blocks are available for templates needing to handle unprocessed mustache blocks.
+
+      :html
+        {{{{raw-helper}}}}
+          {{bar}}
+        {{{{/raw-helper}}}}
+
+      .notes
+        will execute the helper <code>raw-helper</code> without interpretting the content.
+
+      :javascript
+        Handlebars.registerHelper('raw-helper', function(options) {
+          return options.fn();
+        });
+
+      .notes
+        will render
+
+      :html
+        {{bar}}
