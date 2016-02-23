@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Handlebars.js: Minimal Templating on Steroids</title>
+    <title>Handlebars.js 中文网: Minimal Templating on Steroids</title>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <link href="/stylesheets/application.css" media="all" rel="stylesheet" type="text/css"/><link href="/stylesheets/sunburst.css" media="all" rel="stylesheet" type="text/css"/>
     <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -10,76 +10,62 @@
     <div id="body">
       <div id="header">
         <a href="/">
-          <img alt="Handlebars.js: Minimal Templating on Steroids" src="images/handlebars_logo.png"/>
+          <img alt="Handlebars.js 中文网: Minimal Templating on Steroids" src="images/handlebars_logo.png"/>
         </a>
       </div>
       <div id="contents">
         <a href="http://www.devswag.com/collections/handlebars" id="callout">
-          <img alt="Buy Handlebars swag on DevSwag!" src="images/handlebars-devswag.png"/>
+          <img alt="上DevSwag购买Handlebars商品!" src="images/handlebars-devswag.png"/>
         </a>
         <div id="intro">
-          <p>
-            Handlebars provides the power necessary to let you build
-            <strong>semantic templates</strong> effectively with no frustration.
-          </p>
-          <p>
-            Handlebars is largely compatible with Mustache templates.
-            In most cases it is possible to swap out Mustache with
-            Handlebars and continue using your current templates.
-            Complete details can be found
-            <a href="https://github.com/wycats/handlebars.js#differences-between-handlebarsjs-and-mustache">here</a>.
-          </p>
+          <p></p>
+          Handlebars 为你提供了一个可以毫无挫折感的高效率书写 <strong>语义化的模板</strong> 所必需的一切。
+          <p></p>
+          Mustache 模板和 Handlebars 是兼容的，
+          所以你可以把Mustache模板拿来导入到Handlebars中，
+          并开始使用Handlebars所提供的更丰富的功能。
         </div>
-        <a class="download" href="installation.html">Installation</a>
+        <a class="download" href="installation.html">安装下载</a>
         <h2 id="getting-started">
-          Getting Started
+          快速开始
         </h2>
         <div class="contents">
           <div class="bullet">
             <div class="description">
-              Handlebars templates look like regular HTML, with embedded
-              handlebars expressions.
+              Handlebars模板看起来就像是正常的Html，并使用了嵌入的 handlebars 表达式。
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>entry<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSourceBright">{{title}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;    <span class="EmbeddedSourceBright">{{body}}</span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              A handlebars expression is a <code>{{</code>, some contents,
-              followed by a <code>}}</code>
+              handlebars表达式，是以 <code>{{</code> 开始，跟一些内容，然后以  <code>}}</code> 结束。
             </div>
-            <a class="more-info" href="expressions.html">Learn More: Expressions</a>
+            <a class="more-info" href="expressions.html">更多资料：表达式</a>
           </div>
           <div class="bullet">
             <div class="description">
-              You can deliver a template to the browser by including it
-              in a <code>&lt;script&gt;</code> tag.
+              你可以通过<code>&lt;script&gt;</code>标签把一段模板加载到浏览器中。
             </div>
             <pre class="sunburst"><span class="EmbeddedSourceBright"><span class="EmbeddedSourceBright">&lt;</span><span class="MetaTagInline">script</span> <span class="EmbeddedSourceBright"><span class="MetaTagInline">id</span><span class="EmbeddedSourceBright">=</span><span class="String"><span class="String">&quot;</span><span class="String">entry-template</span><span class="String">&quot;</span></span></span> <span class="MetaTagInline">type</span>=<span class="String"><span class="String">&quot;</span>text/x-handlebars-template<span class="String">&quot;</span></span><span class="EmbeddedSourceBright">&gt;</span></span>&#x000A;<span class="EmbeddedSourceBright">  <span class="Keyword">&lt;</span>div <span class="Storage">class</span><span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>entry<span class="String">&quot;</span></span><span class="Keyword">&gt;</span></span>&#x000A;<span class="EmbeddedSourceBright">    <span class="Keyword">&lt;</span>h1<span class="Keyword">&gt;</span><span class="EmbeddedSourceBright">{</span><span class="EmbeddedSourceBright">{</span>title<span class="EmbeddedSourceBright">}</span><span class="EmbeddedSourceBright">}</span><span class="Keyword">&lt;</span>/h1<span class="Keyword">&gt;</span></span>&#x000A;<span class="EmbeddedSourceBright">    <span class="Keyword">&lt;</span>div <span class="Storage">class</span><span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span><span class="Keyword">&gt;</span></span>&#x000A;<span class="EmbeddedSourceBright">      <span class="EmbeddedSourceBright">{</span><span class="EmbeddedSourceBright">{</span>body<span class="EmbeddedSourceBright">}</span><span class="EmbeddedSourceBright">}</span></span>&#x000A;<span class="EmbeddedSourceBright">    <span class="Keyword">&lt;</span>/div<span class="Keyword">&gt;</span></span>&#x000A;<span class="EmbeddedSourceBright">  <span class="Keyword">&lt;</span>/div<span class="Keyword">&gt;</span></span>&#x000A;<span class="EmbeddedSourceBright"><span class="EmbeddedSourceBright">&lt;/</span><span class="MetaTagInline">script</span><span class="EmbeddedSourceBright">&gt;</span></span>&#x000A;</pre>
           </div>
           <div class="bullet">
             <div class="description">
-              Compile a template in JavaScript by using
-              <code>Handlebars.compile</code>
+              在 JavaScript 中使用 <code>Handlebars.compile</code> 来编译模板。
             </div>
             <pre class="sunburst"><span class="Storage">var</span> source   <span class="Keyword">=</span> <span class="Keyword">$</span>(<span class="String"><span class="String">&quot;</span>#entry-template<span class="String">&quot;</span></span>).html();&#x000A;<span class="Storage">var</span> template <span class="Keyword">=</span> Handlebars.<span class="SupportFunction">compile</span>(source);&#x000A;</pre>
             <div class="notes">
-              It is also possible to precompile your templates. This will
-              result in a smaller required runtime library and significant
-              savings from not having to compile the template in the
-              browser. This can be especially important when working with
-              mobile devices.
+              还可以预编译模板。这样的话，就只需要一个更小的运行时库文件，并且对性能来说是一个极大的节约，因为这样就不必在浏览器中编译模板了。这点在移动版的开发中就更显的非常重要了。
             </div>
-            <a class="more-info" href="precompilation.html">Learn More: Precompilation</a>
+            <a class="more-info" href="precompilation.html">更多资料：预编译</a>
           </div>
           <div class="bullet">
             <div class="description">
-              Get the HTML result of evaluating a Handlebars template by
-              executing the template with a context.
+              只需传递一个上下文context执行模板，即可得到返回的 HTML 的值。
             </div>
             <pre class="sunburst"><span class="Storage">var</span> context <span class="Keyword">=</span> {title: <span class="String"><span class="String">&quot;</span>My New Post<span class="String">&quot;</span></span>, body: <span class="String"><span class="String">&quot;</span>This is my first post!<span class="String">&quot;</span></span>};&#x000A;<span class="Storage">var</span> html    <span class="Keyword">=</span> template(context);&#x000A;</pre>
             <div class="notes">
-              results in
+              得到下面的HTML
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>entry<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>My New Post<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;    This is my first post!&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
-            <a class="more-info" href="execution.html">Learn More: Execution</a>
+            <a class="more-info" href="execution.html">更多资料：执行</a>
           </div>
         </div>
         <h2 id="html-escaping">
@@ -88,154 +74,146 @@
         <div class="context">
           <div class="bullet">
             <div class="description">
-              Handlebars HTML-escapes values returned by a <code>{{expression}}</code>.
-              If you don't want Handlebars to escape a value, use the "triple-stash", <code>{{{</code>.
+              Handlebars的 <code>{{expression}}</code>表达式会返回一个 HTML编码 HTML-escape 过的值。如果不希望Handlebars来编码这些值，使用三个大括号即可：<code>{{{</code>。
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>entry<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSourceBright">{{title}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;    <span class="EmbeddedSourceBright">{{{body}}</span>}&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              with this context:
+              使用这段上下文（数据）：
             </div>
             <pre class="sunburst">{&#x000A;  title: <span class="String"><span class="String">&quot;</span>All about &lt;p&gt; Tags<span class="String">&quot;</span></span>,&#x000A;  body: <span class="String"><span class="String">&quot;</span>&lt;p&gt;This is a post about &amp;lt;p&amp;gt; tags&lt;/p&gt;<span class="String">&quot;</span></span>&#x000A;}&#x000A;</pre>
             <div class="notes">
-              results in:
+              会得到如下结果：
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>entry<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>All About <span class="Constant"><span class="Constant">&amp;</span>lt<span class="Constant">;</span></span>p<span class="Constant"><span class="Constant">&amp;</span>gt<span class="Constant">;</span></span> Tags<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;    <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">p</span><span class="MetaTagAll">&gt;</span></span>This is a post about <span class="Constant"><span class="Constant">&amp;</span>lt<span class="Constant">;</span></span>p<span class="Constant"><span class="Constant">&amp;</span>gt<span class="Constant">;</span></span> tags<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">p</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              Handlebars will not escape a <code>Handlebars.SafeString</code>.
-              If you write a helper that generates its own HTML, you will usually
-              want to return a <code>new Handlebars.SafeString(result)</code>.
-              In such a circumstance, you will want to manually escape parameters.
+              Handlebars 不会再对 <code>Handlebars.SafeString</code>
+              安全字符串进行编码。如果你写的 helper 用来生成 HTML，
+              就经常需要返回一个 <code>new Handlebars.SafeString(result)</code>。
+              在这种情况下，你就需要手动的来编码参数了。
             </div>
             <pre class="sunburst">Handlebars.registerHelper(<span class="String"><span class="String">&#39;</span>link<span class="String">&#39;</span></span>, <span class="Storage">function</span>(text, url) {&#x000A;  text <span class="Keyword">=</span> Handlebars.Utils.escapeExpression(text);&#x000A;  url  <span class="Keyword">=</span> Handlebars.Utils.escapeExpression(url);&#x000A;&#x000A;  <span class="Storage">var</span> result <span class="Keyword">=</span> <span class="String"><span class="String">&#39;</span>&lt;a href=&quot;<span class="String">&#39;</span></span> <span class="Keyword">+</span> url <span class="Keyword">+</span> <span class="String"><span class="String">&#39;</span>&quot;&gt;<span class="String">&#39;</span></span> <span class="Keyword">+</span> text <span class="Keyword">+</span> <span class="String"><span class="String">&#39;</span>&lt;/a&gt;<span class="String">&#39;</span></span>;&#x000A;&#x000A;  <span class="Keyword">return</span> <span class="Keyword">new</span> <span class="JEntityNameType">Handlebars.SafeString</span>(result);&#x000A;});&#x000A;</pre>
             <div class="notes">
-              This will escape the passed in parameters, but mark the response as
-              safe, so Handlebars will not try to escape it even if the "triple-stash"
-              is not used.
+              这样来编码传递进来的参数，并把返回的值标记为 安全，这样的话，
+              即便不是哟给你“三个大括号”，Handlebars 就不会再次编码它了。
             </div>
           </div>
         </div>
         <h2 id="block-expressions">
-          Block Expressions
+          块级表达式
         </h2>
         <div class="context">
           <div class="bullet">
             <div class="description">
-              Block expressions allow you to define helpers that will invoke
-              a section of your template with a different context than the
-              current. These block helpers are identified by a <code>#</code> preceeding
-              the helper name and require a matching closing mustache, <code>/</code>, of the
-              same name.
+              块级表达式允许你定义一个helpers，
+              并使用一个不同于当前的上下文（context）来调用你模板的一部分。
+              现在考虑下这种情况，你需要一个helper来生成一段 HTML 列表：
             </div>
             <div class="notes">
-              Let's consider a helper that will generate an HTML list:
+              并使用下面的上下文（数据）：
             </div>
             <pre class="sunburst"><span class="EmbeddedSourceBright">{{#list people}}</span><span class="EmbeddedSourceBright">{{firstName}}</span> <span class="EmbeddedSourceBright">{{lastName}}</span><span class="EmbeddedSourceBright">{{/list}}</span>&#x000A;</pre>
             <div class="notes">
-              If we have the following context:
+              并使用下面的上下文（数据）：
             </div>
             <pre class="sunburst">{&#x000A;  people: [&#x000A;    {firstName: <span class="String"><span class="String">&quot;</span>Yehuda<span class="String">&quot;</span></span>, lastName: <span class="String"><span class="String">&quot;</span>Katz<span class="String">&quot;</span></span>},&#x000A;    {firstName: <span class="String"><span class="String">&quot;</span>Carl<span class="String">&quot;</span></span>, lastName: <span class="String"><span class="String">&quot;</span>Lerche<span class="String">&quot;</span></span>},&#x000A;    {firstName: <span class="String"><span class="String">&quot;</span>Alan<span class="String">&quot;</span></span>, lastName: <span class="String"><span class="String">&quot;</span>Johnson<span class="String">&quot;</span></span>}&#x000A;  ]&#x000A;}&#x000A;</pre>
             <div class="notes">
-              we would create a helper named <code>list</code> to generate our
-              HTML list. The helper receives the <code>people</code> as its
-              first parameter, and an options hash as its second parameter.
-              The options hash contains a property named <code>fn</code>,
-              which you can invoke with a context just as you would invoke a
-              normal Handlebars template.
+              此时需要创建一个 名为 <code>list</code>  的 helper 来生成这段 HTML 列表。
+              这个 helper 使用 people 作为第一个参数，
+              还有一个 options 对象（hash哈希）作为第二个参数。
+              这个 options 对象有一个叫 fn 的属性，你可以传递一个上下文给它（fn），
+              就跟执行一个普通的 Handlebars 模板一样：
             </div>
             <pre class="sunburst">Handlebars.registerHelper(<span class="String"><span class="String">&#39;</span>list<span class="String">&#39;</span></span>, <span class="Storage">function</span>(items, options) {&#x000A;  <span class="Storage">var</span> out <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>&lt;ul&gt;<span class="String">&quot;</span></span>;&#x000A;&#x000A;  <span class="Keyword">for</span>(<span class="Storage">var</span> i<span class="Keyword">=</span><span class="Constant">0</span>, l<span class="Keyword">=</span>items.<span class="SupportConstant">length</span>; i<span class="Keyword">&lt;</span>l; i<span class="Keyword">++</span>) {&#x000A;    out <span class="Keyword">=</span> out <span class="Keyword">+</span> <span class="String"><span class="String">&quot;</span>&lt;li&gt;<span class="String">&quot;</span></span> <span class="Keyword">+</span> options.fn(items[i]) <span class="Keyword">+</span> <span class="String"><span class="String">&quot;</span>&lt;/li&gt;<span class="String">&quot;</span></span>;&#x000A;  }&#x000A;&#x000A;  <span class="Keyword">return</span> out <span class="Keyword">+</span> <span class="String"><span class="String">&quot;</span>&lt;/ul&gt;<span class="String">&quot;</span></span>;&#x000A;});&#x000A;</pre>
             <div class="notes">
-              When executed, the template will render:
+              执行之后，这个模板就会渲染出：
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">ul</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagInline"><span class="MetaTagInline">&lt;</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span>Yehuda Katz<span class="MetaTagInline"><span class="MetaTagInline">&lt;/</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span>&#x000A;  <span class="MetaTagInline"><span class="MetaTagInline">&lt;</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span>Carl Lerche<span class="MetaTagInline"><span class="MetaTagInline">&lt;/</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span>&#x000A;  <span class="MetaTagInline"><span class="MetaTagInline">&lt;</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span>Alan Johnson<span class="MetaTagInline"><span class="MetaTagInline">&lt;/</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">ul</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              Block helpers have more features, such as the ability to create an
-              <code>else</code> section (used, for instance, by the built-in <code>if</code>
-              helper).
+              块级的 helpers 还有很多其他的特性，比如可以创建一个 <code>else</code>
+              区块（例如，内置的 if helper 就是用 else）。
             </div>
             <div class="notes">
-              Since the contents of a block helper are escaped when you call
-              <code>options.fn(context)</code>, Handlebars does not escape
-              the results of a block helper. If it did, inner content would
-              be double-escaped!
+              注意，因为在你执行 options.fn(context) 的时候，这个 helper 已经把内容编码一次了，
+              所以 Handlebars 不会再对这个 helper 输出的值进行编码了。
+              如果编码了，这些内容就会被编码两次！
             </div>
-            <a class="more-info" href="block_helpers.html">Learn More: Block Helpers</a>
+            <a class="more-info" href="block_helpers.html">更多资料：块级Helpers</a>
           </div>
         </div>
         <h2 id="paths">
-          Handlebars Paths
+          Handlebars 路径
         </h2>
         <div class="content">
           <div class="bullet">
             <div class="description">
-              Handlebars supports simple paths, just like Mustache.
+              Handlebars 支持简单的路径，就像Mustache那样。
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">p</span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSourceBright">{{name}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">p</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
           </div>
           <div class="bullet">
             <div class="description">
-              Handlebars also supports nested paths, making it possible
-              to look up properties nested below the current context.
+              Handlebars 同样也支持嵌套的路径，这样的话就可以在当前的上下文中查找内部嵌套的属性了。
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>entry<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSourceBright">{{title}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h2</span><span class="MetaTagAll">&gt;</span></span>By <span class="EmbeddedSourceBright">{{author.name}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h2</span><span class="MetaTagAll">&gt;</span></span>&#x000A;&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;    <span class="EmbeddedSourceBright">{{body}}</span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              That template works with this context
+              上面的模板使用下面这段上下文：
             </div>
             <pre class="sunburst"><span class="Storage">var</span> context <span class="Keyword">=</span> {&#x000A;  title: <span class="String"><span class="String">&quot;</span>My First Blog Post!<span class="String">&quot;</span></span>,&#x000A;  author: {&#x000A;    id: <span class="Constant">47</span>,&#x000A;    name: <span class="String"><span class="String">&quot;</span>Yehuda Katz<span class="String">&quot;</span></span>&#x000A;  },&#x000A;  body: <span class="String"><span class="String">&quot;</span>My first post. Wheeeee!<span class="String">&quot;</span></span>&#x000A;};&#x000A;</pre>
             <div class="notes">
-              This makes it possible to use Handlebars templates with
-              more raw JSON objects.
+              这样一来 Handlebars 就可以直接把JSON数据拿来用了。
             </div>
           </div>
           <div class="bullet">
             <div class="description">
-              Nested handlebars paths can also include <code>../</code> segments,
-              which evaluate their paths against a parent context.
+              巢状嵌套的 handlebars 路径也可以使用 <code>../</code>，
+              这样会把路径指向父级（上层）上下文。
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>Comments<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>&#x000A;&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll"><span class="MetaTagAll">id</span><span class="MetaTagAll">=</span><span class="String"><span class="String">&quot;</span><span class="String">comments</span><span class="String">&quot;</span></span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="EmbeddedSourceBright">{{#each comments}}</span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h2</span><span class="MetaTagAll">&gt;</span></span><span class="MetaTagInline"><span class="MetaTagInline">&lt;</span><span class="MetaTagInline">a</span> <span class="MetaTagInline">href</span>=<span class="String"><span class="String">&quot;</span>/posts/<span class="StringEmbeddedSource">{{../permalink}}</span>#<span class="StringEmbeddedSource">{{id}}</span><span class="String">&quot;</span></span><span class="MetaTagInline">&gt;</span></span><span class="EmbeddedSourceBright">{{title}}</span><span class="MetaTagInline"><span class="MetaTagInline">&lt;/</span><span class="MetaTagInline">a</span><span class="MetaTagInline">&gt;</span></span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h2</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSourceBright">{{body}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="EmbeddedSourceBright">{{/each}}</span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              Even though the link is printed while in the context of a comment,
-              it can still go back to the main context (the post) to retrieve
-              its permalink.
+              尽管 a 链接在输出时是以 comment 评论为上下文的，
+              但它仍然可以退回上一层的上下文（post上下文）并取出permalink（固定链接）值。
             </div>
             <div class="notes">
-              The exact value that <code>../</code> will resolve to varies based on the helper that is calling the block. Using <code>../</code> is only necessary when context changes, so children of helpers such as <code>each</code> would require the use of <code>../</code> while children of helpers such as <code>if</code> do not.
+              <code>../</code> 标识符表示对模板的父级作用域的引用，并不表示在上下文数据中的上一层。
+              这是因为块级 helpers 可以以任何上下文来调用一个块级表达式，
+              所以这个【上一层】的概念用来指模板作用域的父级更有意义些。
             </div>
             <pre class="sunburst"><span class="EmbeddedSourceBright">{{permalink}}</span>&#x000A;<span class="EmbeddedSourceBright">{{#each comments}}</span>&#x000A;  <span class="EmbeddedSourceBright">{{../permalink}}</span>&#x000A;&#x000A;  <span class="EmbeddedSourceBright">{{#if title}}</span>&#x000A;    <span class="EmbeddedSourceBright">{{../permalink}}</span>&#x000A;  <span class="EmbeddedSourceBright">{{/if}}</span>&#x000A;<span class="EmbeddedSourceBright">{{/each}}</span>&#x000A;</pre>
             <div class="notes">
-              In this example all of the above reference the same <code>permalink</code> value even though they are located within different blocks. This behavior is new as of Handlebars 4, the <a href="https://github.com/wycats/handlebars.js/blob/master/release-notes.md">release notes</a> discuss the prior behavior as well as the migration plan.
+              在这个例子中所有上述基准相同的 <code>permalink</代码>
+              即使它们位于不同的块内的值。
+              此行为是新的 Handlebars 4，
+              <a href="https://github.com/wycats/handlebars.js/blob/master/release-notes.md">release notes</a>
+              讨论以前的行为，以及迁移计划。
             </div>
           </div>
           <div class="bullet">
             <div class="description">
-              Handlebars also allows for name conflict resolution between helpers and
-              data fields via a <code>this</code> reference:
+              Handlebars也允许通过一个 this 的引用来解决 helpers 和 数据字段间的名字冲突：
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">p</span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSourceBright">{{./name}}</span> or <span class="EmbeddedSourceBright">{{this/name}}</span> or <span class="EmbeddedSourceBright">{{this.name}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">p</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              Any of the above would cause the <code>name</code> field on the
-              current context to be used rather than a helper of the same name.
+              上面的这一种方式都会将 <code>name</code> 字段引用到当前上下文上，
+              而不是 helper 上的同名属性。
             </div>
           </div>
         </div>
         <h2 id="comments">
-          Template comments with <code>{{!-- --}}</code> or <code>{{! }}</code>.
+          模板注释：<code>{{!-- --}}</code> 或 <code>{{! }}</code>
         </h2>
         <div class="content">
           <div class="bullet">
             <div class="description">
-              You can use comments in your handlebars code just as you would in your
-              code. Since there is generally some level of logic, this is a good
-              practice.
+              你可以在 handlebars 代码中加注释，就跟在代码中写注释一样。
+              对于有一定程度的逻辑的部分来说，这倒是一个很好的实践。
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>entry<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="EmbeddedSourceBright">{{!-- only output author name if an author exists --}}</span>&#x000A;  <span class="EmbeddedSourceBright">{{#if author}}</span>&#x000A;    <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSourceBright">{{firstName}}</span> <span class="EmbeddedSourceBright">{{lastName}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="EmbeddedSourceBright">{{/if}}</span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              The comments will not be in the resulting output. If you'd like the
-              comments to show up. Just use html comments, and they will be output.
+              注释是不会最终输出到返回结果中的。如果你希望把注释展示出来，就使用 HTML 的注释就行了。
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>entry<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="EmbeddedSourceBright">{{! This comment will not be in the output }}</span>&#x000A;  <span class="Comment"><span class="Comment">&lt;!--</span> This comment will be in the output <span class="Comment">--&gt;</span></span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              Any comments that must contain <code>}}</code> or other handlebars
-              tokens should use the <code>{{!-- --}}</code> syntax.
+              所有注释都必须有 <code>}}</code>，一些多行注释可以使用 <code>{{!-- --}}</code> 语法。
             </div>
           </div>
         </div>
@@ -245,36 +223,35 @@
         <div class="content">
           <div class="bullet">
             <div class="description">
-              Handlebars helpers can be accessed from any context in a template.
-              You can register a helper with the <code>Handlebars.registerHelper</code> method.
+              Handlebars 的 helpers 在模板中可以访问任何的上下文。
+              可以通过 <code>Handlebars.registerHelper</code> 方法注册一个 helper。
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>post<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>By <span class="EmbeddedSourceBright">{{fullName author}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSourceBright">{{body}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>Comments<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>&#x000A;&#x000A;  <span class="EmbeddedSourceBright">{{#each comments}}</span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h2</span><span class="MetaTagAll">&gt;</span></span>By <span class="EmbeddedSourceBright">{{fullName author}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h2</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSourceBright">{{body}}</span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="EmbeddedSourceBright">{{/each}}</span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              when using this context and helpers:
+              当时用下面的上下文数据和 helpers：
             </div>
             <pre class="sunburst"><span class="Storage">var</span> context <span class="Keyword">=</span> {&#x000A;  author: {firstName: <span class="String"><span class="String">&quot;</span>Alan<span class="String">&quot;</span></span>, lastName: <span class="String"><span class="String">&quot;</span>Johnson<span class="String">&quot;</span></span>},&#x000A;  body: <span class="String"><span class="String">&quot;</span>I Love Handlebars<span class="String">&quot;</span></span>,&#x000A;  comments: [{&#x000A;    author: {firstName: <span class="String"><span class="String">&quot;</span>Yehuda<span class="String">&quot;</span></span>, lastName: <span class="String"><span class="String">&quot;</span>Katz<span class="String">&quot;</span></span>},&#x000A;    body: <span class="String"><span class="String">&quot;</span>Me too!<span class="String">&quot;</span></span>&#x000A;  }]&#x000A;};&#x000A;&#x000A;Handlebars.registerHelper(<span class="String"><span class="String">&#39;</span>fullName<span class="String">&#39;</span></span>, <span class="Storage">function</span>(person) {&#x000A;  <span class="Keyword">return</span> person.firstName <span class="Keyword">+</span> <span class="String"><span class="String">&quot;</span> <span class="String">&quot;</span></span> <span class="Keyword">+</span> person.lastName;&#x000A;});&#x000A;</pre>
             <div class="notes">
-              results in:
+              会得到如下结果：
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>post<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>By Alan Johnson<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>I Love Handlebars<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>Comments<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h1</span><span class="MetaTagAll">&gt;</span></span>&#x000A;&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h2</span><span class="MetaTagAll">&gt;</span></span>By Yehuda Katz<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h2</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll">class</span>=<span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>Me Too!<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
           </div>
           <div class="bullet">
             <div class="description">
-              Helpers receive the current context as the <code>this</code> context
-              of the function.
+              Helpers 会把当前的上下文作为函数中的 <code>this</code> 上下文。
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">ul</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="EmbeddedSourceBright">{{#each items}}</span>&#x000A;  <span class="MetaTagInline"><span class="MetaTagInline">&lt;</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span><span class="EmbeddedSourceBright">{{agree_button}}</span><span class="MetaTagInline"><span class="MetaTagInline">&lt;/</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span>&#x000A;  <span class="EmbeddedSourceBright">{{/each}}</span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">ul</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              when using this context and helpers:
+              当使用下面的 this上下文 和 helpers：
             </div>
             <pre class="sunburst"><span class="Storage">var</span> context <span class="Keyword">=</span> {&#x000A;  items: [&#x000A;    {name: <span class="String"><span class="String">&quot;</span>Handlebars<span class="String">&quot;</span></span>, emotion: <span class="String"><span class="String">&quot;</span>love<span class="String">&quot;</span></span>},&#x000A;    {name: <span class="String"><span class="String">&quot;</span>Mustache<span class="String">&quot;</span></span>, emotion: <span class="String"><span class="String">&quot;</span>enjoy<span class="String">&quot;</span></span>},&#x000A;    {name: <span class="String"><span class="String">&quot;</span>Ember<span class="String">&quot;</span></span>, emotion: <span class="String"><span class="String">&quot;</span>want to learn<span class="String">&quot;</span></span>}&#x000A;  ]&#x000A;};&#x000A;&#x000A;Handlebars.registerHelper(<span class="String"><span class="String">&#39;</span>agree_button<span class="String">&#39;</span></span>, <span class="Storage">function</span>() {&#x000A;  <span class="Storage">var</span> emotion <span class="Keyword">=</span> Handlebars.escapeExpression(<span class="Variable">this</span>.emotion),&#x000A;      name <span class="Keyword">=</span> Handlebars.escapeExpression(<span class="Variable">this</span>.<span class="SupportConstant">name</span>);&#x000A;&#x000A;  <span class="Keyword">return</span> <span class="Keyword">new</span> <span class="JEntityNameType">Handlebars.SafeString</span>(&#x000A;    <span class="String"><span class="String">&quot;</span>&lt;button&gt;I agree. I <span class="String">&quot;</span></span> <span class="Keyword">+</span> emotion <span class="Keyword">+</span> <span class="String"><span class="String">&quot;</span> <span class="String">&quot;</span></span> <span class="Keyword">+</span> name <span class="Keyword">+</span> <span class="String"><span class="String">&quot;</span>&lt;/button&gt;<span class="String">&quot;</span></span>&#x000A;  );&#x000A;});&#x000A;</pre>
             <div class="notes">
-              results in:
+              会得到如下结果：
             </div>
             <pre class="sunburst"><span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">ul</span><span class="MetaTagAll">&gt;</span></span>&#x000A;  <span class="MetaTagInline"><span class="MetaTagInline">&lt;</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span><span class="MetaTagInline"><span class="MetaTagInline">&lt;</span><span class="MetaTagInline">button</span><span class="MetaTagInline">&gt;</span></span>I agree. I love Handlebars<span class="MetaTagInline"><span class="MetaTagInline">&lt;/</span><span class="MetaTagInline">button</span><span class="MetaTagInline">&gt;</span></span><span class="MetaTagInline"><span class="MetaTagInline">&lt;/</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span>&#x000A;  <span class="MetaTagInline"><span class="MetaTagInline">&lt;</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span><span class="MetaTagInline"><span class="MetaTagInline">&lt;</span><span class="MetaTagInline">button</span><span class="MetaTagInline">&gt;</span></span>I agree. I enjoy Mustache<span class="MetaTagInline"><span class="MetaTagInline">&lt;/</span><span class="MetaTagInline">button</span><span class="MetaTagInline">&gt;</span></span><span class="MetaTagInline"><span class="MetaTagInline">&lt;/</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span>&#x000A;  <span class="MetaTagInline"><span class="MetaTagInline">&lt;</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span><span class="MetaTagInline"><span class="MetaTagInline">&lt;</span><span class="MetaTagInline">button</span><span class="MetaTagInline">&gt;</span></span>I agree. I want to learn Ember<span class="MetaTagInline"><span class="MetaTagInline">&lt;/</span><span class="MetaTagInline">button</span><span class="MetaTagInline">&gt;</span></span><span class="MetaTagInline"><span class="MetaTagInline">&lt;/</span><span class="MetaTagInline">li</span><span class="MetaTagInline">&gt;</span></span>&#x000A;<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">ul</span><span class="MetaTagAll">&gt;</span></span>&#x000A;</pre>
             <div class="notes">
-              If your helper returns HTML that you do not want escaped, make sure
-              to return a new <code>Handlebars.SafeString</code>.
+              如果你不希望你的 helper 返回的 HTML 值被编码，就请务必返回一个
+              <code>Handlebars.SafeString</code>
             </div>
           </div>
         </div>
@@ -334,7 +311,7 @@
           </div>
         </div>
         <a class="issue-tracker" href="https://github.com/wycats/handlebars-site/issues">
-          Found a documentation issue? Tell us!
+          如果发现问题？ 告诉我们！
         </a>
       </div>
     </div>
@@ -343,14 +320,7 @@
       <img alt="Fork me on GitHub" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
     </a>
     <script>
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-557621-9']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+      var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256697465'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/stat.php%3Fid%3D1256697465' type='text/javascript'%3E%3C/script%3E"));
     </script>
   </body>
 </html>
